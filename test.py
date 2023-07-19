@@ -36,7 +36,7 @@ def main():
         start_time = timeit.default_timer()
 
         try:
-            output = subprocess.check_output(f"{command} < {in_file}", shell=True, timeout=4).decode()
+            output = subprocess.check_output(f"{command} < {in_file}", shell=True, timeout=3).decode()
         except subprocess.TimeoutExpired:
             print(f"Time limit exceeded for test case: {in_file}.")
             return

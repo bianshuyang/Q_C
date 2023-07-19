@@ -1,4 +1,4 @@
-# Q_A
+# Q_C
 Question 3 of https://docs.google.com/document/d/1Utu4nNVWxIIhh2iz33zvVb7jrQQaNrJwpyDz-vnx2Yo/edit
 # Submission
 Submit your main.py / main.cpp / main.c++, etc.

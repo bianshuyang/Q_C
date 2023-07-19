@@ -1,9 +1,9 @@
 import os
 import timeit
 import subprocess
-valid = 1
+import heapq
+
 def main():
-    global valid
     # Ask for a filename
     filename = "main"
 
@@ -29,6 +29,9 @@ def main():
         print(f"No valid file found for {filename}.")
         return
 
+    # Dictionary to store execution times
+    times = {}
+
     # Run the chosen command on each .in file and compare output to .ans file
     for in_file in input_files:
         ans_file = in_file.replace('.in', '.out')
@@ -45,6 +48,7 @@ def main():
             return
 
         elapsed = timeit.default_timer() - start_time
+        times[in_file] = elapsed
 
         # Open the answer file and compare
         with open(ans_file, 'r') as f:
@@ -54,9 +58,20 @@ def main():
             pass
         else:
             print("Fail, you have",output,'but expected',ans)
-            valid = 0
             return
-    if valid:
+
+    # Calculate the sum of the 6 highest times
+    largest_6_times = heapq.nlargest(6, times.values())
+    total_time = sum(largest_6_times)
+
+    # Check if total time exceeds 3 seconds
+    if total_time > 3.0:
+        print("0")
+        print("The following tests contributed most to the execution time:")
+        for file, time in times.items():
+            if time in largest_6_times:
+                print(f"{file}: {time}s")
+    else:
         print("1")
 
 if __name__ == "__main__":

@@ -31,12 +31,12 @@ def main():
 
     # Run the chosen command on each .in file and compare output to .ans file
     for in_file in input_files:
-        ans_file = in_file.replace('.in', '.ans')
+        ans_file = in_file.replace('.in', '.out')
         # Run the command and time it
         start_time = timeit.default_timer()
 
         try:
-            output = subprocess.check_output(f"{command} < {in_file}", shell=True, timeout=3).decode()
+            output = subprocess.check_output(f"{command} < {in_file}", shell=True, timeout=0.5).decode()
         except subprocess.TimeoutExpired:
             print(f"Time limit exceeded for test case: {in_file}.")
             return
